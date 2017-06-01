@@ -4,6 +4,7 @@ import express from 'express';
 // Import local dependencies
 import yoApi from './handlers/yoApi';
 import jsonExamples from './handlers/json-examples';
+import reactExamples from './handlers/react-examples';
 
 // Initialise our app
 const bloksbergApp = express();
@@ -11,6 +12,7 @@ const bloksbergApp = express();
 // Use our subapps
 bloksbergApp.use('/yo', yoApi)
 bloksbergApp.use('/json', jsonExamples)
+bloksbergApp.use('/react', reactExamples)
 
 // Handle 404s
 bloksbergApp.get('*', (req, res, next) => {
