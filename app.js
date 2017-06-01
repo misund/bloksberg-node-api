@@ -3,12 +3,14 @@ import express from 'express';
 
 // Import local dependencies
 import yoApi from './handlers/yoApi';
+import jsonExamples from './handlers/json-examples';
 
 // Initialise our app
 const bloksbergApp = express();
 
-// Use yo as middleware/mount yo as a subapp
+// Use our subapps
 bloksbergApp.use('/yo', yoApi)
+bloksbergApp.use('/json', jsonExamples)
 
 // Handle 404s
 bloksbergApp.get('*', (req, res, next) => {
