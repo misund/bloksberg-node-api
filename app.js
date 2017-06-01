@@ -1,19 +1,17 @@
-// Import dependencies
-import express from 'express'
+// Import external dependencies
+import express from 'express';
 
-// Instantiate an express app
-const yoApi = express()
+// Import local dependencies
+import yoApi from './handlers/yoApi';
 
-// Define some routes and handlers
-yoApi.get('/', (req, res, next) => {
-  return res.send('feel the flow')
-})
+// Initialise our app
+const bloksbergApp = express();
 
-yoApi.get('/yo', (req, res, next) => {
-  return res.send('i herd u like apis')
-})
+// Use yo as middleware/mount yo as a subapp
+bloksbergApp.use('/yo', yoApi)
 
-yoApi.get('*', (req, res, next) => {
+// Handle 404s
+bloksbergApp.get('*', (req, res, next) => {
   return res.status(404).end('Look out, here be draguns');
 })
 
@@ -21,6 +19,6 @@ yoApi.get('*', (req, res, next) => {
 const port = 3000;
 
 // Listen for incoming requests
-yoApi.listen(port, () => {
+bloksbergApp.listen(port, () => {
   console.log('listening for requests on port', port);
 })
